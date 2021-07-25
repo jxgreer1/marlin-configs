@@ -9,3 +9,4 @@ every config ive made, here is where ill explain whats in each mostly so i remem
 6) **sharginan125** his is for quinly to but with an skr e3 mini 1.2 and a bltouch
 7) **tateshi** ender 3 4.2.7 board with a bltouch in 5 pin spot
 8) **TimAndyOthers** quinly kit but with a filament runout detection, and a bltouch wired via endstop pin and a 4.2.7 board
+9) **space ages ksp** ender 3 default with bltouch non 3 volt in 5 pin spot
