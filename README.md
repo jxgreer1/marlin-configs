@@ -7,4 +7,5 @@ every config ive made, here is where ill explain whats in each mostly so i remem
 4) **Nomand Ninja** his firmware is just a stock ender 3 with a silent board with a microswiss all metal hotend
 5) **reddit kid** his was an ender 3 pro with a hemera extruder on it and bltouch 
 6) **sharginan125** his is for quinly to but with an skr e3 mini 1.2 and a bltouch
-7) 
+7) **tateshi** ender 3 4.2.7 board with a bltouch in 5 pin spot
+8) **TimAndyOthers** quinly kit but with a filament runout detection, and a bltouch wired via endstop pin and a 4.2.7 board
