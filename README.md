@@ -12,4 +12,4 @@ every config ive made, here is where ill explain whats in each mostly so i remem
 1) quinly with 4.2.2 board and bltouch in z min port
 2) quinly Microswiss hotend and extruder which needed to reverse motor and switch esteps to 130 filament runout sensor by btt BL Touch with a 5x5 double probed and a 4.2.7 boards
 3) quinly kit but with a filament runout detection, and a bltouch wired via endstop pin and a 4.2.7 board
-4) 
+4) same as 2 but for a ender 3 v2
