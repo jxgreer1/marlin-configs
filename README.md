@@ -6,7 +6,7 @@ every config ive made, here is where ill explain whats in each mostly so i remem
 3) ender 3 default with bltouch non 3 volt in 5 pin spot
 4) stock ender 3 with a silent board with a microswiss all metal hotend
 5) skr 1.2 with bltouch is z min endstop
-6) joel - skr v2 with bltouch in z min endstop
+
 
 /3dque
 
@@ -19,3 +19,4 @@ every config ive made, here is where ill explain whats in each mostly so i remem
 
 /random
 6) joel - skr v2 with bltouch in z min endstop
+7) 
