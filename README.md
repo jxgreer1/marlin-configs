@@ -15,3 +15,7 @@ every config ive made, here is where ill explain whats in each mostly so i remem
 3) quinly kit but with a filament runout detection, and a bltouch wired via endstop pin and a 4.2.7 board
 4) same as 2 but for a ender 3 v2
 5) btt- stock skr mini v2 with blotuch in 5 pin
+
+
+/random
+6) joel - skr v2 with bltouch in z min endstop
