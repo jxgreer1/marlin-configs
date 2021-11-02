@@ -19,4 +19,7 @@ every config ive made, here is where ill explain whats in each mostly so i remem
 
 /random
 6) joel - skr v2 with bltouch in z min endstop
-7) 
+7) ender 6 test
+8) tuxydoh test for e5
+
+THATS IT IM DONE
