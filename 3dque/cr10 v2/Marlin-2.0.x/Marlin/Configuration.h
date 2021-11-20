@@ -1,6 +1,6 @@
 /**
  * Marlin 3D Printer Firmware
- * Copyright (c) 2020 MarlinFirmware [https://github.com/MarlinFirmware/Marlin]
+ * Copyright (c) 2021 MarlinFirmware [https://github.com/MarlinFirmware/Marlin]
  *
  * Based on Sprinter and grbl.
  * Copyright (c) 2011 Camiel Gubbels / Erik van der Zalm
@@ -21,14 +21,14 @@
  */
 #pragma once
 
-#define CONFIG_EXAMPLES_DIR "Creality/CR-10 V2"
+#define CONFIG_EXAMPLES_DIR "Creality/CR-10 V3"
 
 /**
- * Creality CD-10 V2 options
+ * Creality CD-10 V3 options
  */
 
 // Is the BLTouch option installed?
-#define CR10V2_BLTOUCH
+#define CR10V3_BLTOUCH
 
 /**
  * Configuration.h
@@ -78,7 +78,7 @@
 // @section info
 
 // Author info of this build printed to the host during boot and M115
-#define STRING_CONFIG_H_AUTHOR "fran6p, CR-10 V2)" // Who made the changes.
+#define STRING_CONFIG_H_AUTHOR "Aaron Just, CR-10 V3)" // Who made the changes.
 //#define CUSTOM_VERSION_FILE Version.h // Path from the root directory (no quotes)
 
 /**
@@ -124,7 +124,7 @@
  *
  * :[2400, 9600, 19200, 38400, 57600, 115200, 250000, 500000, 1000000]
  */
-#define BAUDRATE 250000
+#define BAUDRATE 115200
 //#define BAUD_RATE_GCODE     // Enable G-code M575 to set the baud rate
 
 /**
@@ -152,7 +152,7 @@
 #endif
 
 // Name displayed in the LCD "Ready" message and Info menu
-#define CUSTOM_MACHINE_NAME "CR-10 V2"
+#define CUSTOM_MACHINE_NAME "CR-10 V3"
 
 // Printer's unique ID, used by some programs to differentiate between machines.
 // Choose your own or use a service like https://www.uuidgenerator.net/version4
@@ -525,7 +525,7 @@
 #define TEMP_WINDOW                  1  // (°C) Temperature proximity for the "temperature reached" timer
 #define TEMP_HYSTERESIS              3  // (°C) Temperature proximity considered "close enough" to the target
 
-#define TEMP_BED_RESIDENCY_TIME      5  // (seconds) Time to wait for bed to "settle" in M190
+#define TEMP_BED_RESIDENCY_TIME      8  // (seconds) Time to wait for bed to "settle" in M190
 #define TEMP_BED_WINDOW              1  // (°C) Temperature proximity for the "temperature reached" timer
 #define TEMP_BED_HYSTERESIS          3  // (°C) Temperature proximity considered "close enough" to the target
 
@@ -565,7 +565,7 @@
 // Above this temperature the heater will be switched off.
 // This can protect components from overheating, but NOT from shorts and failures.
 // (Use MINTEMP for thermistor short/failure protection.)
-#define HEATER_0_MAXTEMP 255
+#define HEATER_0_MAXTEMP 275
 #define HEATER_1_MAXTEMP 275
 #define HEATER_2_MAXTEMP 275
 #define HEATER_3_MAXTEMP 275
@@ -603,7 +603,7 @@
   //#define PID_PARAMS_PER_HOTEND // Uses separate PID parameters for each extruder (useful for mismatched extruders)
                                   // Set/get with gcode: M301 E[extruder number, 0-2]
 
-  // CR-10 V2
+  // CR-10 V3
   #if ENABLED(PID_PARAMS_PER_HOTEND)
     // Specify up to one value per hotend here, according to your setup.
     // If there are fewer values, the last one applies to the remaining hotends.
@@ -652,7 +652,7 @@
 
   // 120V 250W silicone heater into 4mm borosilicate (MendelMax 1.5+)
   // from FOPDT model - kp=.39 Tp=405 Tdead=66, Tc set to 79.2, aggressive factor of .15 (vs .1, 1, 10)
-  // CR-10 V2 24V 240W
+  // CR-10 V3 24V 240W
   #define DEFAULT_bedKp 690.34
   #define DEFAULT_bedKi 111.47
   #define DEFAULT_bedKd 1068.83
@@ -852,7 +852,7 @@
 #define I_MAX_ENDSTOP_INVERTING false // Set to true to invert the logic of the endstop.
 #define J_MAX_ENDSTOP_INVERTING false // Set to true to invert the logic of the endstop.
 #define K_MAX_ENDSTOP_INVERTING false // Set to true to invert the logic of the endstop.
-#define Z_MIN_PROBE_ENDSTOP_INVERTING false // Set to true to invert the logic of the probe.
+#define Z_MIN_PROBE_ENDSTOP_INVERTING DISABLED(CR10V3_BLTOUCH) // Set to true to invert the logic of the probe.
 
 /**
  * Stepper Drivers
@@ -937,19 +937,20 @@
  * Default Axis Steps Per Unit (steps/mm)
  * Override with M92
  *                                      X, Y, Z [, I [, J [, K]]], E0 [, E1[, E2...]]
+ * Updated E Steps to 382.14 for CR-10 V3 Direct Drive
  */
-#define DEFAULT_AXIS_STEPS_PER_UNIT   { 80, 80, 400, 97 }
+#define DEFAULT_AXIS_STEPS_PER_UNIT   { 80.00, 80.00, 400.00, 407 }
 
 /**
  * Default Max Feed Rate (mm/s)
  * Override with M203
  *                                      X, Y, Z [, I [, J [, K]]], E0 [, E1[, E2...]]
  */
-#define DEFAULT_MAX_FEEDRATE          { 750, 750, 15, 75 }
+#define DEFAULT_MAX_FEEDRATE          { 200, 200, 14, 25 }
 
-//#define LIMITED_MAX_FR_EDITING        // Limit edit via M203 or LCD to DEFAULT_MAX_FEEDRATE * 2
+#define LIMITED_MAX_FR_EDITING        // Limit edit via M203 or LCD to DEFAULT_MAX_FEEDRATE * 2
 #if ENABLED(LIMITED_MAX_FR_EDITING)
-  #define MAX_FEEDRATE_EDIT_VALUES    { 600, 600, 10, 50 } // ...or, set your own edit limits
+  #define MAX_FEEDRATE_EDIT_VALUES    { 200, 200, 14, 25 } // ...or, set your own edit limits
 #endif
 
 /**
@@ -958,7 +959,7 @@
  * Override with M201
  *                                      X, Y, Z [, I [, J [, K]]], E0 [, E1[, E2...]]
  */
-#define DEFAULT_MAX_ACCELERATION      { 2000, 2000, 100, 5000 }
+#define DEFAULT_MAX_ACCELERATION      { 500, 500, 100, 1000 }
 
 //#define LIMITED_MAX_ACCEL_EDITING     // Limit edit via M201 or LCD to DEFAULT_MAX_ACCELERATION * 2
 #if ENABLED(LIMITED_MAX_ACCEL_EDITING)
@@ -973,9 +974,9 @@
  *   M204 R    Retract Acceleration
  *   M204 T    Travel Acceleration
  */
-#define DEFAULT_ACCELERATION           800    // X, Y, Z and E acceleration for printing moves
-#define DEFAULT_RETRACT_ACCELERATION  1000    // E acceleration for retracts
-#define DEFAULT_TRAVEL_ACCELERATION    800    // X, Y, Z acceleration for travel (non printing) moves
+#define DEFAULT_ACCELERATION          500    // X, Y, Z and E acceleration for printing moves
+#define DEFAULT_RETRACT_ACCELERATION  500    // E acceleration for retracts
+#define DEFAULT_TRAVEL_ACCELERATION  1000    // X, Y, Z acceleration for travel (non printing) moves
 
 /**
  * Default Jerk limits (mm/s)
@@ -1045,7 +1046,7 @@
 
 // Force the use of the probe for Z-axis homing
 #define USE_PROBE_FOR_Z_HOMING
-#if ENABLED(CR10V2_BLTOUCH)
+#if ENABLED(CR10V3_BLTOUCH)
   #define USE_PROBE_FOR_Z_HOMING
 #endif
 
@@ -1066,7 +1067,7 @@
  */
 //#define Z_MIN_PROBE_PIN 32 // Pin 32 is the RAMPS default
 
-#if ENABLED(CR10V2_BLTOUCH)
+#if ENABLED(CR10V3_BLTOUCH)
   #define Z_MIN_PROBE_PIN 19
 #endif
 
@@ -1105,7 +1106,7 @@
 /**
  * The BLTouch probe uses a Hall effect sensor and emulates a servo.
  */
-#if ENABLED(CR10V2_BLTOUCH)
+#if ENABLED(CR10V3_BLTOUCH)
   #define BLTOUCH
 #endif
 
@@ -1199,17 +1200,18 @@
  *     |    [-]    |
  *     O-- FRONT --+
  */
-#define NOZZLE_TO_PROBE_OFFSET { 47, -10, 0 }
+#define NOZZLE_TO_PROBE_OFFSET { 46, 2, 0 }
 
 // Most probes should stay away from the edges of the bed, but
 // with NOZZLE_AS_PROBE this can be negative for a wider probing area.
-#define PROBING_MARGIN 35
+#define PROBING_MARGIN 10
+#define PROBING_MARGIN_LEFT 45
 
 // X and Y axis travel speed (mm/min) between probes
-#define XY_PROBE_FEEDRATE (150*60)
+#define XY_PROBE_FEEDRATE (200*60)
 
 // Feedrate (mm/min) for the first approach when double-probing (MULTIPLE_PROBING == 2)
-#define Z_PROBE_FEEDRATE_FAST (6*60)
+#define Z_PROBE_FEEDRATE_FAST (14*60)
 
 // Feedrate (mm/min) for the "accurate" probe of each point
 #define Z_PROBE_FEEDRATE_SLOW (Z_PROBE_FEEDRATE_FAST / 2)
@@ -1250,7 +1252,7 @@
  * A total of 2 does fast/slow probes with a weighted average.
  * A total of 3 or more adds more slow probes, taking the average.
  */
-//#define MULTIPLE_PROBING 2
+#define MULTIPLE_PROBING 2
 //#define EXTRA_PROBING    1
 
 /**
@@ -1268,18 +1270,18 @@
  *     But: `M851 Z+1` with a CLEARANCE of 2  =>  2mm from bed to nozzle.
  */
 #define Z_CLEARANCE_DEPLOY_PROBE   10 // Z Clearance for Deploy/Stow
-#define Z_CLEARANCE_BETWEEN_PROBES  5 // Z Clearance between probe points
-#define Z_CLEARANCE_MULTI_PROBE     5 // Z Clearance between multiple probes
-#define Z_AFTER_PROBING           5 // Z position after probing is done
+#define Z_CLEARANCE_BETWEEN_PROBES  3 // Stock: 5 - Z Clearance between probe points
+#define Z_CLEARANCE_MULTI_PROBE     3 // Stock: 5 - Z Clearance between multiple probes
+#define Z_AFTER_PROBING           100 // Z position after probing is done
 
-#define Z_PROBE_LOW_POINT          -2 // Farthest distance below the trigger-point to go before stopping
+#define Z_PROBE_LOW_POINT          -1 // Farthest distance below the trigger-point to go before stopping
 
 // For M851 give a range for adjusting the Z probe offset
 #define Z_PROBE_OFFSET_RANGE_MIN -9
 #define Z_PROBE_OFFSET_RANGE_MAX 9
 
 // Enable the M48 repeatability test to test probe accuracy
-#if ENABLED(CR10V2_BLTOUCH)
+#if ENABLED(CR10V3_BLTOUCH)
   #define Z_MIN_PROBE_REPEATABILITY_TEST
 #endif
 
@@ -1353,7 +1355,8 @@
 // @section extruder
 
 // For direct drive extruder v9 set to true, for geared extruder set to false.
-#define INVERT_E0_DIR false
+// Updated INVERT_E0_DIR for CR-10 V3 Direct Drive
+#define INVERT_E0_DIR true
 #define INVERT_E1_DIR false
 #define INVERT_E2_DIR false
 #define INVERT_E3_DIR false
@@ -1391,12 +1394,12 @@
 // @section machine
 
 // The size of the printable area
-#define X_BED_SIZE 310 // Nozzle is at X0 when homed
-#define Y_BED_SIZE 310 // Nozzle is at Y0 when homed
+#define X_BED_SIZE 300 // Nozzle is at X0 when homed
+#define Y_BED_SIZE 300 // Nozzle is at Y0 when homed
 
 // Travel limits (mm) after homing, corresponding to endstop positions.
-#define X_MIN_POS 0
-#define Y_MIN_POS 0
+#define X_MIN_POS -5 // -5 instead of 0 to center the print area (CR-10 v3)
+#define Y_MIN_POS -5 // -5 instead of 0 to center the print area (CR-10 v3)
 #define Z_MIN_POS 0
 #define X_MAX_POS X_BED_SIZE
 #define Y_MAX_POS Y_BED_SIZE
@@ -1460,11 +1463,11 @@
 #if ENABLED(FILAMENT_RUNOUT_SENSOR)
   #define FIL_RUNOUT_ENABLED_DEFAULT true // Enable the sensor on startup. Override with M412 followed by M500.
   #define NUM_RUNOUT_SENSORS   1          // Number of sensors, up to one per extruder. Define a FIL_RUNOUT#_PIN for each.
-  #define FIL_RUNOUT_PIN 2 // Creality CR-10 V2 stock sensor
+  #define FIL_RUNOUT_PIN 2 // Creality CR-10 V3 stock sensor
 
   #define FIL_RUNOUT_STATE     LOW        // Pin state indicating that filament is NOT present.
-  #define FIL_RUNOUT_PULLUP               // Use internal pullup for filament runout pins.
-  //#define FIL_RUNOUT_PULLDOWN           // Use internal pulldown for filament runout pins.
+  //#define FIL_RUNOUT_PULLUP               // Use internal pullup for filament runout pins.
+  #define FIL_RUNOUT_PULLDOWN           // Use internal pulldown for filament runout pins.
   //#define WATCH_ALL_RUNOUT_SENSORS      // Execute runout script on any triggering sensor, not only for the active extruder.
                                           // This is automatically enabled for MIXING_EXTRUDERs.
 
@@ -1559,7 +1562,7 @@
  */
 //#define AUTO_BED_LEVELING_3POINT
 //#define AUTO_BED_LEVELING_LINEAR
-#if ENABLED(CR10V2_BLTOUCH)
+#if ENABLED(CR10V3_BLTOUCH)
   #define AUTO_BED_LEVELING_BILINEAR
 #endif
 //#define AUTO_BED_LEVELING_UBL
@@ -1570,7 +1573,7 @@
  * these options to restore the prior leveling state or to always enable
  * leveling immediately after G28.
  */
-#if ENABLED(CR10V2_BLTOUCH)
+#if ENABLED(CR10V3_BLTOUCH)
   #define RESTORE_LEVELING_AFTER_G28
 #endif
 //#define ENABLE_LEVELING_AFTER_G28
@@ -1578,7 +1581,7 @@
 /**
  * Auto-leveling needs preheating
  */
-#define PREHEAT_BEFORE_LEVELING
+//#define PREHEAT_BEFORE_LEVELING
 #if ENABLED(PREHEAT_BEFORE_LEVELING)
   #define LEVELING_NOZZLE_TEMP 120   // (°C) Only applies to E0 at this time
   #define LEVELING_BED_TEMP     50
@@ -1694,7 +1697,7 @@
  * Add a bed leveling sub-menu for ABL or MBL.
  * Include a guided procedure if manual probing is enabled.
  */
-#if ENABLED(CR10V2_BLTOUCH)
+#if ENABLED(CR10V3_BLTOUCH)
   #define LCD_BED_LEVELING
 #endif
 
@@ -1705,14 +1708,16 @@
 #endif
 
 // Add a menu item to move between bed corners for manual bed adjustment
-//#define LEVEL_BED_CORNERS
+#define LEVEL_BED_CORNERS
 
 #if ENABLED(LEVEL_BED_CORNERS)
-  #define LEVEL_CORNERS_INSET_LFRB { 30, 30, 30, 30 } // (mm) Left, Front, Right, Back insets
+  #define LEVEL_CORNERS_INSET_LFRB { 45, 45, 45, 45 } // (mm) Left, Front, Right, Back insets
   #define LEVEL_CORNERS_HEIGHT      0.0   // (mm) Z height of nozzle at leveling points
   #define LEVEL_CORNERS_Z_HOP       4.0   // (mm) Z height of nozzle between leveling points
-  //#define LEVEL_CENTER_TOO              // Move to the center after the last corner
-  //#define LEVEL_CORNERS_USE_PROBE
+  #define LEVEL_CENTER_TOO              // Move to the center after the last corner
+  #if ENABLED(CR10V3_BLTOUCH)
+    #define LEVEL_CORNERS_USE_PROBE
+  #endif
   #if ENABLED(LEVEL_CORNERS_USE_PROBE)
     #define LEVEL_CORNERS_PROBE_TOLERANCE 0.1
     #define LEVEL_CORNERS_VERIFY_RAISED   // After adjustment triggers the probe, re-probe to verify
@@ -1766,7 +1771,7 @@
  * - Allows Z homing only when XY positions are known and trusted.
  * - If stepper drivers sleep, XY homing may be required again before Z homing.
  */
-#if ENABLED(CR10V2_BLTOUCH)
+#if ENABLED(CR10V3_BLTOUCH)
   #define Z_SAFE_HOMING
 #endif
 
@@ -1776,7 +1781,7 @@
 #endif
 
 // Homing speeds (mm/min)
-#define HOMING_FEEDRATE_MM_M { (50*60), (50*60), (6*60) }
+#define HOMING_FEEDRATE_MM_M { (80*60), (80*60), (10*60) }
 
 // Validate that endstops are triggered on homing moves
 #define VALIDATE_HOMING_ENDSTOPS
@@ -1913,12 +1918,12 @@
 
 #if ENABLED(NOZZLE_PARK_FEATURE)
   // Specify a park position as { X, Y, Z_raise }
+  #define NOZZLE_PARK_POINT { (X_MIN_POS + 5), (Y_MAX_POS - 5), 100 }
   //#define NOZZLE_PARK_X_ONLY          // X move only is required to park
   //#define NOZZLE_PARK_Y_ONLY          // Y move only is required to park
   #define NOZZLE_PARK_Z_RAISE_MIN   2   // (mm) Always raise Z by at least this distance
-  #define NOZZLE_PARK_POINT { (X_MIN_POS + 5), (Y_MAX_POS - 5), 10 }
-  #define NOZZLE_PARK_XY_FEEDRATE 80   // (mm/s) X and Y axes feedrate (also used for delta Z axis)
-  #define NOZZLE_PARK_Z_FEEDRATE    5   // (mm/s) Z axis feedrate (not used for delta printers)
+  #define NOZZLE_PARK_XY_FEEDRATE 200   // (mm/s) X and Y axes feedrate (also used for delta Z axis)
+  #define NOZZLE_PARK_Z_FEEDRATE   14   // (mm/s) Z axis feedrate (not used for delta printers)
 #endif
 
 /**
@@ -2622,11 +2627,6 @@
 #endif
 
 //
-// CR-6 OEM touch screen. A DWIN display with touch.
-//
-//#define DWIN_CREALITY_TOUCHLCD
-
-//
 // Touch-screen LCD for Malyan M200/M300 printers
 //
 //#define MALYAN_LCD
@@ -2657,12 +2657,6 @@
 #if ENABLED(NEXTION_TFT)
   #define LCD_SERIAL_PORT 1  // Default is 1 for Nextion
 #endif
-
-//
-// PanelDue touch controller by Escher3D
-// http://escher3d.com/pages/order/products/product2.php
-//
-//#define PANELDUE
 
 //
 // Third-party or vendor-customized controller interfaces.
@@ -2868,7 +2862,7 @@
 
 // Set number of user-controlled fans. Disable to use all board-defined fans.
 // :[1,2,3,4,5,6,7,8]
-//#define NUM_M106_FANS 1
+#define NUM_M106_FANS 1
 
 // Increase the FAN PWM frequency. Removes the PWM noise but increases heating in the FET/Arduino
 //#define FAST_PWM_FAN
