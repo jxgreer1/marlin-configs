@@ -38,7 +38,7 @@ Marlin is constantly improving thanks to a huge number of contributors from all 
 
 Regular users can open and close their own issues, but only the administrators can do project-related things like add labels, merge changes, set milestones, and kick trolls. The current Marlin admin team consists of:
  - Scott Lahteine [[@thinkyhead](https://github.com/thinkyhead)] - USA - Project Maintainer &nbsp; [![Donate](https://api.flattr.com/button/flattr-badge-large.png)](http://www.thinkyhead.com/donate-to-marlin)
-  - Jack Greer [@jxgreer1] [(https://github.com/Jxgreer1)] - USA 
+  - Jack Greer [[@jxgreer1](https://github.com/Jxgreer1)] - USA 
  - Roxanne Neufeld [[@Roxy-3D](https://github.com/Roxy-3D)] - USA
  - Keith Bennett [[@thisiskeithb](https://github.com/thisiskeithb)] - USA
  - Victor Oliveira [[@rhapsodyv](https://github.com/rhapsodyv)] - Brazil
